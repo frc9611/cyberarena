@@ -1,7 +1,8 @@
-Cheesy Arena [![Build Status](https://github.com/Team254/cheesy-arena/actions/workflows/test.yml/badge.svg)](https://github.com/Team254/cheesy-arena/actions)
+Cyber Arena [![Build Status](https://github.com/frc9611/cyberarena/actions/workflows/test.yml/badge.svg)](https://github.com/Team254/cheesy-arena/actions)
 ============
-A field management system that just works.
+A field management system that just works. (fork from Team254's cheesy-arena but maintained by CyberRain #9611 engineering team)
 
+For the original version, see [Cheesy Arena](https://github.com/Team254/cheesy-arena).
 For the game-agnostic version, see [Cheesy Arena Lite](https://github.com/Team254/cheesy-arena-lite).
 
 ## Key features
@@ -30,7 +31,7 @@ Teams may use Cheesy Arena freely for practice, scrimmages, and off-season event
 
 **From a pre-built release**
 
-Download the [latest release](https://github.com/Team254/cheesy-arena/releases). Pre-built packages are available for Linux, macOS (x64 and M1), and Windows.
+Download the [latest release](https://github.com/frc9611/cyberarena/releases). Pre-built packages are available for Linux, macOS (x64 and M1), and Windows.
 
 On recent versions of macOS, you may be prevented from running an app from an unidentified developer; see [these instructions](https://support.apple.com/guide/mac-help/open-a-mac-app-from-an-unidentified-developer-mh40616/mac) on how to bypass the warning.
 
@@ -45,12 +46,12 @@ On recent versions of macOS, you may be prevented from running an app from an un
 
 **IP address configuration**
 
-When running Cheesy Arena on a playing field with robots, set the IP address of the computer running Cheesy Arena to 10.0.100.5. By a convention baked into the FRC Driver Station software, driver stations will broadcast their presence on the network to this hardcoded address so that the FMS does not need to discover them by some other method.
+When running Cheesy Arena/Cyber Arena on a playing field with robots, set the IP address of the computer running the arena to 10.0.100.5. By a convention baked into the FRC Driver Station software, driver stations will broadcast their presence on the network to this hardcoded address so that the FMS does not need to discover them by some other method.
 
-When running Cheesy Arena without robots for testing or development, any IP address can be used.
+When running Cheesy Arena/Cyber Arena without robots for testing or development, any IP address can be used.
 
 ## Under the hood
-Cheesy Arena is written using [Go](https://golang.org), a language developed by Google and first released in 2009. Go excels in the areas of concurrency, networking, performance, and portability, which makes it ideal for a field management system.
+Cheesy Arena just as the fork is written using [Go](https://golang.org), a language developed by Google and first released in 2009. Go excels in the areas of concurrency, networking, performance, and portability, which makes it ideal for a field management system.
 
 Cheesy Arena is implemented as a web server, with all human interaction done via browser. The graphical interfaces are implemented in HTML, JavaScript, and CSS. There are many advantages to this approach &ndash; development of new graphical elements is rapid, and no software needs to be installed other than on the server. Client web pages send commands and receive updates using WebSockets.
 
@@ -79,7 +80,7 @@ Cheesy Arena is far from finished! You can help by:
 * Contributing documentation to the [wiki](https://github.com/Team254/cheesy-arena/wiki)
 * Sending baked goods to [Pat](https://github.com/patfair)
 
-## Acknowledgements
+## Acknowledgements (Cheesy Arena)
 [Several folks](https://github.com/Team254/cheesy-arena/graphs/contributors) have contributed pull requests. Thanks!
 
 In addition, the following individuals have contributed to make Cheesy Arena a reality:
