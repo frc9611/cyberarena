@@ -1,4 +1,4 @@
-Cyber Arena [![Build Status](https://github.com/frc9611/cyberarena/actions/workflows/test.yml/badge.svg)](https://github.com/Team254/cheesy-arena/actions)
+Cyber Arena
 ============
 A field management system that just works. (fork from Team254's cheesy-arena but maintained by CyberRain #9611 engineering team)
 
