@@ -34,7 +34,8 @@ type DriverStationConnection struct {
 	AllianceStation           string
 	Auto                      bool
 	Enabled                   bool
-	Estop                     bool
+	EStop                     bool
+	AStop                     bool
 	DsLinked                  bool
 	RadioLinked               bool
 	RioLinked                 bool
@@ -173,8 +174,11 @@ func (dsConn *DriverStationConnection) encodeControlPacket(arena *Arena) [22]byt
 	if dsConn.Enabled {
 		packet[3] |= 0x04
 	}
-	if dsConn.Estop {
+	if dsConn.EStop {
 		packet[3] |= 0x80
+	}
+	if dsConn.AStop {
+		packet[3] |= 0x40
 	}
 
 	// Unknown or unused.
@@ -258,7 +262,6 @@ func (dsConn *DriverStationConnection) decodeStatusPacket(data [36]byte) {
 
 	// Number of missed packets sent from the DS to the robot.
 	dsConn.MissedPacketCount = int(data[2]) - dsConn.missedPacketOffset
-
 }
 
 // Listens for TCP connection requests to Cheesy Arena from driver stations.
