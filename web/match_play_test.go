@@ -126,9 +126,8 @@ func TestCommitTiebreak(t *testing.T) {
 		MatchId: match.Id,
 		// These should all be fields that aren't part of the tiebreaker.
 		RedScore: &game.Score{
-			// TODO(pat): Update for 2024.
-			//Grid:  game.Grid{Nodes: [3][9]game.NodeState{{game.Cube}, {game.Cone}}},
-			Fouls: []game.Foul{{RuleId: 1}, {RuleId: 2}},
+			AmpSpeaker: game.AmpSpeaker{TeleopUnamplifiedSpeakerNotes: 1},
+			Fouls:      []game.Foul{{RuleId: 1}, {RuleId: 2}},
 		},
 		BlueScore: &game.Score{
 			Fouls: []game.Foul{{RuleId: 1}},
@@ -136,18 +135,16 @@ func TestCommitTiebreak(t *testing.T) {
 	}
 
 	// Sanity check that the test scores are equal; they will need to be updated accordingly for each new game.
-	// TODO(pat): Update for 2024.
-	//assert.Equal(
-	//	t,
-	//	matchResult.RedScore.Summarize(matchResult.BlueScore).Score,
-	//	matchResult.BlueScore.Summarize(matchResult.RedScore).Score,
-	//)
+	assert.Equal(
+		t,
+		matchResult.RedScore.Summarize(matchResult.BlueScore).Score,
+		matchResult.BlueScore.Summarize(matchResult.RedScore).Score,
+	)
 
 	err := web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
 	match, _ = web.arena.Database.GetMatchById(1)
-	// TODO(pat): Update for 2024.
-	//assert.Equal(t, game.TieMatch, match.Status)
+	assert.Equal(t, game.TieMatch, match.Status)
 
 	// The match should still be tied since the tiebreaker criteria for a perfect tie are fulfilled.
 	match.UseTiebreakCriteria = true
@@ -155,79 +152,94 @@ func TestCommitTiebreak(t *testing.T) {
 	err = web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
 	match, _ = web.arena.Database.GetMatchById(1)
-	// TODO(pat): Update for 2024.
-	//assert.Equal(t, game.TieMatch, match.Status)
+	assert.Equal(t, game.TieMatch, match.Status)
 
 	// Change the score to still be equal nominally but trigger the tiebreaker criteria.
-	// TODO(pat): Update for 2024.
-	//matchResult.BlueScore.AutoDockStatuses = [3]bool{true, false, false}
-	//matchResult.BlueScore.AutoChargeStationLevel = true
+	matchResult.BlueScore.TrapStatuses = [3]bool{true, false, false}
 	matchResult.BlueScore.Fouls = []game.Foul{{IsTechnical: false}, {IsTechnical: true}}
 
 	// Sanity check that the test scores are equal; they will need to be updated accordingly for each new game.
-	// TODO(pat): Update for 2024.
-	//assert.Equal(
-	//	t,
-	//	matchResult.RedScore.Summarize(matchResult.BlueScore).Score,
-	//	matchResult.BlueScore.Summarize(matchResult.RedScore).Score,
-	//)
+	assert.Equal(
+		t,
+		matchResult.RedScore.Summarize(matchResult.BlueScore).Score,
+		matchResult.BlueScore.Summarize(matchResult.RedScore).Score,
+	)
 
 	err = web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
 	match, _ = web.arena.Database.GetMatchById(1)
-	// TODO(pat): Update for 2024.
-	//assert.Equal(t, game.RedWonMatch, match.Status)
+	assert.Equal(t, game.RedWonMatch, match.Status)
 
 	// Swap red and blue and verify that the tie is broken in the other direction.
 	matchResult.RedScore, matchResult.BlueScore = matchResult.BlueScore, matchResult.RedScore
 
 	// Sanity check that the test scores are equal; they will need to be updated accordingly for each new game.
-	// TODO(pat): Update for 2024.
-	//assert.Equal(
-	//	t,
-	//	matchResult.RedScore.Summarize(matchResult.BlueScore).Score,
-	//	matchResult.BlueScore.Summarize(matchResult.RedScore).Score,
-	//)
+	assert.Equal(
+		t,
+		matchResult.RedScore.Summarize(matchResult.BlueScore).Score,
+		matchResult.BlueScore.Summarize(matchResult.RedScore).Score,
+	)
 
 	err = web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
 	match, _ = web.arena.Database.GetMatchById(1)
-	// TODO(pat): Update for 2024.
-	//assert.Equal(t, game.BlueWonMatch, match.Status)
+	assert.Equal(t, game.BlueWonMatch, match.Status)
 }
 
 func TestCommitCards(t *testing.T) {
 	web := setupTestWeb(t)
 
 	// Check that a yellow card sticks with a team.
-	team := &model.Team{Id: 5}
-	web.arena.Database.CreateTeam(team)
+	team1 := &model.Team{Id: 3}
+	team2 := &model.Team{Id: 5}
+	web.arena.Database.CreateTeam(team1)
+	web.arena.Database.CreateTeam(team2)
 	match := &model.Match{Id: 0, Type: model.Qualification, Red1: 1, Red2: 2, Red3: 3, Blue1: 4, Blue2: 5, Blue3: 6}
 	assert.Nil(t, web.arena.Database.CreateMatch(match))
 	matchResult := model.NewMatchResult()
 	matchResult.MatchId = match.Id
+	matchResult.RedCards = map[string]string{"3": "yellow"}
 	matchResult.BlueCards = map[string]string{"5": "yellow"}
 	err := web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
-	team, _ = web.arena.Database.GetTeamById(5)
-	assert.True(t, team.YellowCard)
+	team1, _ = web.arena.Database.GetTeamById(3)
+	assert.True(t, team1.YellowCard)
+	team2, _ = web.arena.Database.GetTeamById(5)
+	assert.True(t, team2.YellowCard)
 
 	// Check that editing a match result removes a yellow card from a team.
 	matchResult = model.NewMatchResult()
 	matchResult.MatchId = match.Id
 	err = web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
-	team, _ = web.arena.Database.GetTeamById(5)
-	assert.False(t, team.YellowCard)
+	team1, _ = web.arena.Database.GetTeamById(3)
+	assert.False(t, team1.YellowCard)
+	team2, _ = web.arena.Database.GetTeamById(5)
+	assert.False(t, team2.YellowCard)
 
 	// Check that a red card causes a yellow card to stick with a team.
 	matchResult = model.NewMatchResult()
 	matchResult.MatchId = match.Id
+	matchResult.RedCards = map[string]string{"3": "red"}
 	matchResult.BlueCards = map[string]string{"5": "red"}
 	err = web.commitMatchScore(match, matchResult, true)
 	assert.Nil(t, err)
-	team, _ = web.arena.Database.GetTeamById(5)
-	assert.True(t, team.YellowCard)
+	team1, _ = web.arena.Database.GetTeamById(3)
+	assert.True(t, team1.YellowCard)
+	team2, _ = web.arena.Database.GetTeamById(5)
+	assert.True(t, team2.YellowCard)
+
+	// Check that a DQ does not cause a yellow card to stick with a team.
+	matchResult = model.NewMatchResult()
+	matchResult.MatchId = match.Id
+	matchResult.RedCards = map[string]string{"3": "dq"}
+	matchResult.BlueCards = map[string]string{"5": "dq"}
+	err = web.commitMatchScore(match, matchResult, true)
+	assert.Nil(t, err)
+	team1, _ = web.arena.Database.GetTeamById(3)
+	assert.False(t, team1.YellowCard)
+	team2, _ = web.arena.Database.GetTeamById(5)
+	assert.False(t, team2.YellowCard)
 
 	// Check that a red card in playoffs zeroes out the score.
 	tournament.CreateTestAlliances(web.arena.Database, 2)
@@ -245,6 +257,13 @@ func TestCommitCards(t *testing.T) {
 	assert.Nil(t, web.commitMatchScore(match, matchResult, true))
 	assert.Equal(t, 0, matchResult.RedScoreSummary().Score)
 	assert.NotEqual(t, 0, matchResult.BlueScoreSummary().Score)
+
+	// Check that a DQ in playoffs zeroes out the score.
+	matchResult.RedCards = map[string]string{}
+	matchResult.BlueCards = map[string]string{"5": "dq"}
+	assert.Nil(t, web.commitMatchScore(match, matchResult, true))
+	assert.NotEqual(t, 0, matchResult.RedScoreSummary().Score)
+	assert.Equal(t, 0, matchResult.BlueScoreSummary().Score)
 }
 
 func TestMatchPlayWebsocketCommands(t *testing.T) {
@@ -316,12 +335,11 @@ func TestMatchPlayWebsocketCommands(t *testing.T) {
 	readWebsocketType(t, ws, "audienceDisplayMode")
 	readWebsocketType(t, ws, "allianceStationDisplayMode")
 	assert.Equal(t, field.PostMatch, web.arena.MatchState)
-	// TODO(pat): Update for 2024.
-	//web.arena.RedRealtimeScore.CurrentScore.AutoDockStatuses = [3]bool{false, true, true}
+	web.arena.RedRealtimeScore.CurrentScore.AmpSpeaker.TeleopAmplifiedSpeakerNotes = 6
 	web.arena.BlueRealtimeScore.CurrentScore.LeaveStatuses = [3]bool{true, false, true}
 	ws.Write("commitResults", nil)
 	readWebsocketMultiple(t, ws, 5) // scorePosted, matchLoad, realtimeScore, allianceStationDisplayMode, scoringStatus
-	//assert.Equal(t, [3]bool{false, true, true}, web.arena.SavedMatchResult.RedScore.AutoDockStatuses)
+	assert.Equal(t, 6, web.arena.SavedMatchResult.RedScore.AmpSpeaker.TeleopAmplifiedSpeakerNotes)
 	assert.Equal(t, [3]bool{true, false, true}, web.arena.SavedMatchResult.BlueScore.LeaveStatuses)
 	assert.Equal(t, field.PreMatch, web.arena.MatchState)
 	ws.Write("discardResults", nil)

@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"text/template"
 
@@ -50,6 +51,9 @@ func NewWeb(arena *field.Arena) *Web {
 		},
 		"add": func(a, b int) int {
 			return a + b
+		},
+		"itoa": func(a int) string {
+			return strconv.Itoa(a)
 		},
 		"multiply": func(a, b int) int {
 			return a * b
@@ -119,11 +123,11 @@ func addNoCacheHeader(handler http.Handler) http.Handler {
 
 // Sets up the mapping between URLs and handlers.
 func (web *Web) newHandler() http.Handler {
-
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /", web.indexHandler)
 	mux.HandleFunc("GET /alliance_selection", web.allianceSelectionGetHandler)
 	mux.HandleFunc("POST /alliance_selection", web.allianceSelectionPostHandler)
+	mux.HandleFunc("GET /alliance_selection/websocket", web.allianceSelectionWebsocketHandler)
 	mux.HandleFunc("POST /alliance_selection/finalize", web.allianceSelectionFinalizeHandler)
 	mux.HandleFunc("POST /alliance_selection/reset", web.allianceSelectionResetHandler)
 	mux.HandleFunc("POST /alliance_selection/start", web.allianceSelectionStartHandler)
@@ -148,6 +152,8 @@ func (web *Web) newHandler() http.Handler {
 	mux.HandleFunc("GET /displays/bracket/websocket", web.bracketDisplayWebsocketHandler)
 	mux.HandleFunc("GET /displays/field_monitor", web.fieldMonitorDisplayHandler)
 	mux.HandleFunc("GET /displays/field_monitor/websocket", web.fieldMonitorDisplayWebsocketHandler)
+	mux.HandleFunc("GET /displays/logo", web.logoDisplayHandler)
+	mux.HandleFunc("GET /displays/logo/websocket", web.logoDisplayWebsocketHandler)
 	mux.HandleFunc("GET /displays/queueing", web.queueingDisplayHandler)
 	mux.HandleFunc("GET /displays/queueing/match_load", web.queueingDisplayMatchLoadHandler)
 	mux.HandleFunc("GET /displays/queueing/websocket", web.queueingDisplayWebsocketHandler)
@@ -157,6 +163,8 @@ func (web *Web) newHandler() http.Handler {
 	mux.HandleFunc("GET /displays/twitch/websocket", web.twitchDisplayWebsocketHandler)
 	mux.HandleFunc("GET /displays/wall", web.wallDisplayHandler)
 	mux.HandleFunc("GET /displays/wall/websocket", web.wallDisplayWebsocketHandler)
+	mux.HandleFunc("GET /displays/webpage", web.webpageDisplayHandler)
+	mux.HandleFunc("GET /displays/webpage/websocket", web.webpageDisplayWebsocketHandler)
 	mux.HandleFunc("GET /login", web.loginHandler)
 	mux.HandleFunc("POST /login", web.loginPostHandler)
 	mux.HandleFunc("GET /match_play", web.matchPlayHandler)
@@ -188,7 +196,9 @@ func (web *Web) newHandler() http.Handler {
 	mux.HandleFunc("GET /reports/pdf/teams", web.teamsPdfReportHandler)
 	mux.HandleFunc("GET /setup/awards", web.awardsGetHandler)
 	mux.HandleFunc("POST /setup/awards", web.awardsPostHandler)
-	mux.HandleFunc("POST /setup/db/clear", web.clearDbHandler)
+	mux.HandleFunc("GET /setup/breaks", web.breaksGetHandler)
+	mux.HandleFunc("POST /setup/breaks", web.breaksPostHandler)
+	mux.HandleFunc("POST /setup/db/clear/{type}", web.clearDbHandler)
 	mux.HandleFunc("POST /setup/db/restore", web.restoreDbHandler)
 	mux.HandleFunc("GET /setup/db/save", web.saveDbHandler)
 	mux.HandleFunc("GET /setup/displays", web.displaysGetHandler)

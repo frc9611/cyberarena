@@ -172,7 +172,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <label class="col-lg-6 control-label">AP Address</label>
+            <label class="col-lg-6 control-label">AP Address (specify port 8081 for Linksys APs)</label>
             <div class="col-lg-6">
               <input type="text" class="form-control" name="apAddress" value="{{.ApAddress}}">
             </div>
@@ -223,6 +223,62 @@
             <label class="col-lg-6 control-label">PLC Address</label>
             <div class="col-lg-6">
               <input type="text" class="form-control" name="plcAddress" value="{{.PlcAddress}}">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="mb-4">
+          <legend>Team Signs</legend>
+          <p>
+            If you are using a set of the (2024+) official team number / timer signs, enter their IP addresses here.
+          </p>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Red 1 Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignRed1Address" value="{{.TeamSignRed1Address}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Red 2 Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignRed2Address" value="{{.TeamSignRed2Address}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Red 3 Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignRed3Address" value="{{.TeamSignRed3Address}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Red Timer Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignRedTimerAddress"
+                value="{{.TeamSignRedTimerAddress}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Blue 1 Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignBlue1Address" value="{{.TeamSignBlue1Address}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Blue 2 Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignBlue2Address" value="{{.TeamSignBlue2Address}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Blue 3 Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignBlue3Address" value="{{.TeamSignBlue3Address}}">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-lg-6 control-label">Blue Timer Sign Address</label>
+            <div class="col-lg-6">
+              <input type="text" class="form-control" name="teamSignBlueTimerAddress"
+                value="{{.TeamSignBlueTimerAddress}}">
             </div>
           </div>
         </fieldset>
@@ -301,13 +357,23 @@
         <a href="/setup/db/save"><button class="btn btn-primary">Save Copy of Database</button></a>
       </p>
       <p>
-        <button type="button" class="btn btn-danger" onclick="$('#uploadDatabase').modal('show');">
+        <button type="button" class="btn btn-warning" onclick="$('#uploadDatabase').modal('show');">
           Load Database from Backup
         </button>
       </p>
       <p>
-        <button type="button" class="btn btn-danger" onclick="$('#confirmClearData').modal('show');">
-          Clear All Match Data
+        <button type="button" class="btn btn-danger" onclick="$('#confirmClearDataPlayoff').modal('show');">
+          Clear Playoff/Alliance Data
+        </button>
+      </p>
+      <p>
+        <button type="button" class="btn btn-danger" onclick="$('#confirmClearDataQualification').modal('show');">
+          Clear Qualification Data
+        </button>
+      </p>
+      <p>
+        <button type="button" class="btn btn-danger" onclick="$('#confirmClearDataPractice').modal('show');">
+          Clear Practice Data
         </button>
       </p>
     </div>
@@ -353,7 +419,7 @@
     </div>
   </div>
 </div>
-<div id="confirmClearData" class="modal" style="top: 20%;">
+<div id="confirmClearDataPlayoff" class="modal" style="top: 20%;">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -361,12 +427,53 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to clear all match, ranking, and alliance selection data?</p>
+        <p>Are you sure you want to clear all playoff match and alliance selection data?</p>
+        <p>The database will automatically be backed up.</p>
       </div>
       <div class="modal-footer">
-        <form class="form-horizontal" action="/setup/db/clear" method="POST">
+        <form class="form-horizontal" action="/setup/db/clear/playoff" method="POST">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-danger">Clear All Match Data</button>
+          <button type="submit" class="btn btn-danger">Clear Playoff/Alliance Data</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="confirmClearDataQualification" class="modal" style="top: 20%;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to clear all qualification match and ranking data?</p>
+        <p>The database will automatically be backed up.</p>
+      </div>
+      <div class="modal-footer">
+        <form class="form-horizontal" action="/setup/db/clear/qualification" method="POST">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Clear Qualification Data</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="confirmClearDataPractice" class="modal" style="top: 20%;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Confirm</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to clear all practice match data?</p>
+        <p>The database will automatically be backed up.</p>
+      </div>
+      <div class="modal-footer">
+        <form class="form-horizontal" action="/setup/db/clear/practice" method="POST">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-danger">Clear Practice Data</button>
         </form>
       </div>
     </div>

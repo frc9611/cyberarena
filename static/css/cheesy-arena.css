@@ -83,7 +83,7 @@
   background-color: #960;
 }
 .btn-match-play {
-  width: 180px;
+  width: 170px;
   height: 50px;
   line-height: 36px;
   font-size: 16px;
@@ -92,6 +92,18 @@
   background-color: #e66;
 }
 .badge-scoring[data-ready=true] {
+  background-color: #0c6;
+}
+.badge-status {
+  background-color: #e66;
+}
+.badge-status[data-status=BOOTING] {
+  background-color: #f92;
+}
+.badge-status[data-status=CONFIGURING] {
+  background-color: #08f;
+}
+.badge-status[data-status=ACTIVE] {
   background-color: #0c6;
 }
 .badge-saved-match {

@@ -15,7 +15,8 @@
         <div id="blueScore"></div>
         <div class="row">
           <div class="text-center col-lg-12">
-            <a href="/match_review"><button type="button" class="btn btn-secondary">Cancel</button></a>
+            <a href="{{if .IsCurrentMatch}}/match_play{{else}}/match_review{{end}}"><button type="button"
+              class="btn btn-secondary">Cancel</button></a>
             <button type="submit" class="btn btn-primary">Save</button>
           </div>
         </div>
@@ -176,8 +177,8 @@
               <select class="form-control" name="{{"{{../alliance}}"}}Foul{{"{{@index}}"}}RuleId">
                 {{range $rule := .Rules}}
                   <option value="{{$rule.Id}}">{{$rule.RuleNumber}}
-                      [{{if $rule.IsRankingPoint}}{{if $rule.IsTechnical}}Tech {{end}}Foul + Free RP{{else}}
-                      {{if $rule.IsTechnical}}Tech {{end}}Foul{{end}}]: {{$rule.Description}}
+                      [{{if $rule.IsRankingPoint}}{{if $rule.IsTechnical}}Tech {{end}}Foul +
+                      Free RP{{else}}{{if $rule.IsTechnical}}Tech {{end}}Foul{{end}}]: {{$rule.Description}}
                   </option>
                 {{end}}
               </select>
@@ -213,6 +214,12 @@
                 <label>
                   <input type="radio" name="{{"{{alliance}}"}}Team{{"{{team"}}{{$i}}{{"}}"}}Card" value="red">
                   Red
+                </label>
+              </div>
+              <div class="col-lg-2">
+                <label>
+                  <input type="radio" name="{{"{{alliance}}"}}Team{{"{{team"}}{{$i}}{{"}}"}}Card" value="dq">
+                  DQ
                 </label>
               </div>
             </div>

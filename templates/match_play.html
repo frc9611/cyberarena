@@ -46,36 +46,44 @@
       </div>
     </div>
     <div class="row justify-content-center mt-1">
+      <button type="button" id="showOverlay" class="btn btn-info btn-match-play ms-1"
+        onclick="showOverlay();" disabled>
+        Show Overlay
+      </button>
       <button type="button" id="startMatch" class="btn btn-success btn-match-play ms-1"
-          onclick="startMatch();" disabled>
+        onclick="startMatch();" disabled>
         Start Match
       </button>
-      <button type="button" id="abortMatch" class="btn btn-danger btn-match-play ms-1"
-          onclick="abortMatch();" disabled>
-        Abort Match
+      <button type="button" id="commitResults" class="btn btn-primary btn-match-play ms-1"
+        onclick="confirmCommit();" disabled>
+        Commit Results
       </button>
-      <button type="button" id="substituteTeams" class="btn btn-info btn-match-play ms-1"
-        onclick="substituteTeams();" disabled>
-        Substitute Teams
-      </button>
-      <button type="button" id="signalReset" class="btn btn-success btn-match-play ms-1"
-          onclick="signalReset();" disabled>
-        Signal Reset
+      <button type="button" id="showFinalScore" class="btn btn-info btn-match-play ms-1"
+        onclick="showFinalScore();" disabled>
+        Show Final Score
       </button>
     </div>
     <div class="row justify-content-center mt-1">
-      <button type="button" id="commitResults" class="btn btn-primary btn-match-play ms-1"
-          onclick="confirmCommit();" disabled>
-        Commit Results
+      <button type="button" id="substituteTeams" class="btn btn-primary btn-match-play ms-1"
+        onclick="substituteTeams();" disabled>
+        Substitute Teams
+      </button>
+      <button type="button" id="abortMatch" class="btn btn-danger btn-match-play ms-1"
+        onclick="abortMatch();" disabled>
+        Abort Match
       </button>
       <button type="button" id="discardResults" class="btn btn-warning btn-match-play ms-1"
-          onclick="$('#confirmDiscardResults').modal('show');" disabled>
+        onclick="$('#confirmDiscardResults').modal('show');" disabled>
         Discard Results
       </button>
-      <a href="/match_review/current/edit" role="button" class="btn btn-secondary btn-match-play ms-1 disabled"
-        disabled>
+      <button type="button" id="editResults" class="btn btn-secondary btn-match-play ms-1"
+        onclick="window.location = '/match_review/current/edit';" disabled>
         Edit Results
-      </a>
+      </button>
+      <button type="button" id="signalReset" class="btn btn-success btn-match-play ms-1"
+        onclick="signalReset();" disabled>
+        Signal Reset
+      </button>
     </div>
     <div class="card card-body bg-body-tertiary mt-3">
       <div class="row">
@@ -84,13 +92,20 @@
           <p><span class="badge badge-scoring" id="refereeScoreStatus">Referee</span><br />
             <span class="badge badge-scoring" id="redScoreStatus"></span><br />
             <span class="badge badge-scoring" id="blueScoreStatus"></span></p>
-        {{if .PlcIsEnabled}}
-          <p>PLC Status</p>
+        {{if .EventSettings.NetworkSecurityEnabled}}
+          <h6>Network Status</h6>
           <p>
-            <span class="badge badge-scoring" id="plcStatus"></span><br />
-            <span class="badge badge-scoring" id="fieldEStop">E-Stop</span>
+            <span class="badge badge-status" id="accessPointStatus">Access Point</span><br />
+            <span class="badge badge-status" id="switchStatus">Switch</span>
+          </p>
+        {{end}}
+        {{if .PlcIsEnabled}}
+          <h6>PLC Status</h6>
+          <p>
+            <span class="badge badge-scoring" id="plcStatus"></span>
+            <span class="badge badge-scoring" id="fieldEStop">E-Stop</span><br />
             {{range $name, $status := .PlcArmorBlockStatuses}}
-              <br /><span class="badge badge-scoring" id="plc{{$name}}Status">{{$name}}</span>
+              <span class="badge badge-scoring" id="plc{{$name}}Status">{{$name}}</span>
             {{end}}
           </p>
         {{end}}
@@ -105,7 +120,8 @@
             </div>
             <div>
               <label>
-                <input type="radio" name="audienceDisplay" value="intro" onclick="setAudienceDisplay();"> Match Intro
+                <input type="radio" name="audienceDisplay" value="intro"
+                    onclick="setAudienceDisplay();" id="introRadio"> Match Intro
               </label>
             </div>
             <div>
@@ -115,7 +131,8 @@
             </div>
             <div>
               <label>
-                <input type="radio" name="audienceDisplay" value="score" onclick="setAudienceDisplay();"> Final Score
+                <input type="radio" name="audienceDisplay" value="score"
+                    onclick="setAudienceDisplay();" id="scoreRadio"> Final Score
               </label>
             </div>
             <div>
