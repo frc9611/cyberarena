@@ -11,12 +11,14 @@
       {{template "head_common" .}}
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <nav class="navbar navbar-expand-lg bg-cyber-purple">
         <div class="container">
-          <a class="navbar-brand" href="/">Cheesy Arena</a>
+          <a class="navbar-brand" href="/"><b>CyberArena<span id="blink">_</span></b></a>
           <ul class="navbar-nav me-auto">
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button">Setup</a>
+              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"/>
+              </svg> Setup</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="/setup/settings">Settings</a>
                 <a class="dropdown-item" href="/setup/teams">Team List</a>
@@ -30,7 +32,9 @@
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button">Run</a>
+              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M10 12v1h4v-1m4 7H6a1 1 0 0 1-1-1V9h14v9a1 1 0 0 1-1 1ZM4 5h16a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+              </svg> Run</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="/match_play">Match Play</a>
                 <a class="dropdown-item" href="/match_review">Match Review</a>
@@ -39,7 +43,9 @@
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button">Panel</a>
+              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9h6m-6 3h6m-6 3h6M6.996 9h.01m-.01 3h.01m-.01 3h.01M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+              </svg> Referee</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="/panels/referee">Head Referee</a>
                 <a class="dropdown-item" href="/panels/referee?hr=false">Referee</a>
@@ -50,7 +56,9 @@
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button">Report</a>
+              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7h1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h11.5M7 14h6m-6 3h6m0-10h.5m-.5 3h.5M7 7h3v3H7V7Z"/>
+              </svg> Report</a>
               <div class="dropdown-menu">
                 <div class="dropdown-header">PDF Reports</div>
                 <a class="dropdown-item" target="_blank" href="/reports/pdf/teams">Team List</a>
@@ -81,7 +89,9 @@
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button">Display</a>
+              <a href="#" class="nav-link" data-bs-toggle="dropdown" role="button"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 16H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v1M9 12H4m8 8V9h8v11h-8Zm0 0H9m8-4a1 1 0 1 0-2 0 1 1 0 0 0 2 0Z"/>
+              </svg> Display</a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="/display">Placeholder</a>
                 <a class="dropdown-item" href="/displays/announcer">Announcer</a>
@@ -112,7 +122,9 @@
           </ul>
           <ul class="navbar-nav ms-auto">
             <li class="navbar-item">
-              <a class="nav-link" href="#" onclick="$('#aboutPage').modal('show');">About</a>
+              <a class="nav-link" href="#" onclick="$('#aboutPage').modal('show');"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+              </svg> About</a>
             </li>
           </ul>
         </div>
