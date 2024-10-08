@@ -8,7 +8,7 @@ package playoff
 
 import (
 	"fmt"
-	"github.com/Team254/cheesy-arena/game"
+	"github.com/frc9611/cyberarena/game"
 	"math"
 )
 

@@ -6,7 +6,7 @@
 package tournament
 
 import (
-	"github.com/Team254/cheesy-arena/model"
+	"github.com/frc9611/cyberarena/model"
 	"testing"
 )
 

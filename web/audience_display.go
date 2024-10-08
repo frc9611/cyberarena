@@ -8,9 +8,9 @@ package web
 import (
 	"net/http"
 
-	"github.com/Team254/cheesy-arena/game"
-	"github.com/Team254/cheesy-arena/model"
-	"github.com/Team254/cheesy-arena/websocket"
+	"github.com/frc9611/cyberarena/game"
+	"github.com/frc9611/cyberarena/model"
+	"github.com/frc9611/cyberarena/websocket"
 )
 
 // Renders the audience display to be chroma keyed over the video feed.

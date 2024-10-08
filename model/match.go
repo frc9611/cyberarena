@@ -7,7 +7,7 @@ package model
 
 import (
 	"fmt"
-	"github.com/Team254/cheesy-arena/game"
+	"github.com/frc9611/cyberarena/game"
 	"sort"
 	"strings"
 	"time"

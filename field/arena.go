@@ -12,12 +12,12 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/Team254/cheesy-arena/game"
-	"github.com/Team254/cheesy-arena/model"
-	"github.com/Team254/cheesy-arena/network"
-	"github.com/Team254/cheesy-arena/partner"
-	"github.com/Team254/cheesy-arena/playoff"
-	"github.com/Team254/cheesy-arena/plc"
+	"github.com/frc9611/cyberarena/game"
+	"github.com/frc9611/cyberarena/model"
+	"github.com/frc9611/cyberarena/network"
+	"github.com/frc9611/cyberarena/partner"
+	"github.com/frc9611/cyberarena/playoff"
+	"github.com/frc9611/cyberarena/plc"
 )
 
 const (

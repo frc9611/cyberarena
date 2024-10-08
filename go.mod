@@ -1,4 +1,4 @@
-module github.com/Team254/cheesy-arena
+module github.com/frc9611/cyberarena
 
 go 1.22
 

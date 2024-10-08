@@ -7,7 +7,7 @@ package web
 
 import (
 	"fmt"
-	"github.com/Team254/cheesy-arena/game"
+	"github.com/frc9611/cyberarena/game"
 	"log"
 	"net/http"
 	"path/filepath"
@@ -15,8 +15,8 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/Team254/cheesy-arena/field"
-	"github.com/Team254/cheesy-arena/model"
+	"github.com/frc9611/cyberarena/field"
+	"github.com/frc9611/cyberarena/model"
 )
 
 const (

@@ -4,7 +4,7 @@
 package plc
 
 import (
-	"github.com/Team254/cheesy-arena/websocket"
+	"github.com/frc9611/cyberarena/websocket"
 	"github.com/goburrow/modbus"
 	"github.com/stretchr/testify/assert"
 	"testing"

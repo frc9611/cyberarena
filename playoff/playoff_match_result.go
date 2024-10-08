@@ -5,7 +5,7 @@
 
 package playoff
 
-import "github.com/Team254/cheesy-arena/game"
+import "github.com/frc9611/cyberarena/game"
 
 type playoffMatchResult struct {
 	status game.MatchStatus

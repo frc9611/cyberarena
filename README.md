@@ -70,18 +70,18 @@ The PLC code can be found [here](https://github.com/ejordan376/Cheesy-PLC).
 Due to the prohibitive cost of the LEDs and LED controllers used on official fields, for years in which LEDs are mandatory for a proper game experience (such as 2018), Cheesy Arena integrates with [Advatek](https://www.advateklights.com) controllers and LEDs.
 
 ## Advanced networking
-See the [Advanced Networking wiki page](https://github.com/Team254/cheesy-arena/wiki/Advanced-Networking-Concepts) for instructions on what equipment to obtain and how to configure it in order to support advanced network security.
+See the [Advanced Networking wiki page](https://github.com/frc9611/cyberarena/wiki/Advanced-Networking-Concepts) for instructions on what equipment to obtain and how to configure it in order to support advanced network security.
 
 ## Contributing
 Cheesy Arena is far from finished! You can help by:
 
 * Checking out the [TODO list](TODO.md), writing a missing feature, and sending a pull request
-* Filing any bugs or feature requests using the [issue tracker](https://github.com/Team254/cheesy-arena/issues)
-* Contributing documentation to the [wiki](https://github.com/Team254/cheesy-arena/wiki)
+* Filing any bugs or feature requests using the [issue tracker](https://github.com/frc9611/cyberarena/issues)
+* Contributing documentation to the [wiki](https://github.com/frc9611/cyberarena/wiki)
 * Sending baked goods to [Pat](https://github.com/patfair)
 
 ## Acknowledgements (Cheesy Arena)
-[Several folks](https://github.com/Team254/cheesy-arena/graphs/contributors) have contributed pull requests. Thanks!
+[Several folks](https://github.com/frc9611/cyberarena/graphs/contributors) have contributed pull requests. Thanks!
 
 In addition, the following individuals have contributed to make Cheesy Arena a reality:
 

@@ -4,12 +4,12 @@
 package field
 
 import (
-	"github.com/Team254/cheesy-arena/game"
-	"github.com/Team254/cheesy-arena/model"
-	"github.com/Team254/cheesy-arena/partner"
-	"github.com/Team254/cheesy-arena/playoff"
-	"github.com/Team254/cheesy-arena/tournament"
-	"github.com/Team254/cheesy-arena/websocket"
+	"github.com/frc9611/cyberarena/game"
+	"github.com/frc9611/cyberarena/model"
+	"github.com/frc9611/cyberarena/partner"
+	"github.com/frc9611/cyberarena/playoff"
+	"github.com/frc9611/cyberarena/tournament"
+	"github.com/frc9611/cyberarena/websocket"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"

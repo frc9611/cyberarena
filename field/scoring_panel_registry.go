@@ -6,7 +6,7 @@
 package field
 
 import (
-	"github.com/Team254/cheesy-arena/websocket"
+	"github.com/frc9611/cyberarena/websocket"
 	"sync"
 )
 

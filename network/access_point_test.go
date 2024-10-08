@@ -5,7 +5,7 @@ package network
 
 import (
 	"encoding/json"
-	"github.com/Team254/cheesy-arena/model"
+	"github.com/frc9611/cyberarena/model"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
