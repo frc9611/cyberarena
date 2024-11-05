@@ -60,7 +60,7 @@ func (score *Score) Summarize(opponentScore *Score) *ScoreSummary {
 	// Calculate autonomous period points.
 	for _, status := range score.LeaveStatuses {
 		if status {
-			summary.LeavePoints += 2
+			summary.LeavePoints += 3
 		}
 	}
 	autoNotePoints := score.AmpSpeaker.AutoNotePoints()
