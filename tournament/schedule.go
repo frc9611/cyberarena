@@ -8,18 +8,19 @@ package tournament
 import (
 	"encoding/csv"
 	"fmt"
-	"github.com/frc9611/cyberarena/model"
 	"math"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"strconv"
 	"time"
+
+	"github.com/frc9611/cyberarena/model"
 )
 
 const (
 	schedulesDir  = "schedules"
-	TeamsPerMatch = 6
+	TeamsPerMatch = 4
 )
 
 // Creates a random schedule for the given parameters and returns it as a list of matches.
