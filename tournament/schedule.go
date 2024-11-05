@@ -37,6 +37,7 @@ func BuildRandomSchedule(
 
 	file, err := os.Open(fmt.Sprintf("%s/%d_%d.csv", filepath.Join(model.BaseDir, schedulesDir), numTeams,
 		matchesPerTeam))
+
 	if err != nil {
 		return nil, fmt.Errorf("No schedule template exists for %d teams and %d matches", numTeams, matchesPerTeam)
 	}
@@ -53,7 +54,7 @@ func BuildRandomSchedule(
 	// Convert string fields from schedule to integers.
 	anonSchedule := make([][12]int, numMatches)
 	for i := 0; i < numMatches; i++ {
-		for j := 0; j < 12; j++ {
+		for j := 0; j < 12; /* or 12 with 3 teams at alliances*/ j++ {
 			anonSchedule[i][j], err = strconv.Atoi(csvLines[i][j])
 			if err != nil {
 				return nil, err
@@ -82,14 +83,14 @@ func BuildRandomSchedule(
 		matches[i].Red1IsSurrogate = anonMatch[1] == 1
 		matches[i].Red2 = teams[teamShuffle[anonMatch[2]-1]].Id
 		matches[i].Red2IsSurrogate = anonMatch[3] == 1
-		matches[i].Red3 = teams[teamShuffle[anonMatch[4]-1]].Id
-		matches[i].Red3IsSurrogate = anonMatch[5] == 1
+		//matches[i].Red3 = teams[teamShuffle[anonMatch[4]-1]].Id
+		//matches[i].Red3IsSurrogate = anonMatch[5] == 1
 		matches[i].Blue1 = teams[teamShuffle[anonMatch[6]-1]].Id
 		matches[i].Blue1IsSurrogate = anonMatch[7] == 1
 		matches[i].Blue2 = teams[teamShuffle[anonMatch[8]-1]].Id
 		matches[i].Blue2IsSurrogate = anonMatch[9] == 1
-		matches[i].Blue3 = teams[teamShuffle[anonMatch[10]-1]].Id
-		matches[i].Blue3IsSurrogate = anonMatch[11] == 1
+		//matches[i].Blue3 = teams[teamShuffle[anonMatch[10]-1]].Id
+		//matches[i].Blue3IsSurrogate = anonMatch[11] == 1
 		matches[i].TbaMatchKey.MatchNumber = i + 1
 	}
 

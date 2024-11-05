@@ -176,6 +176,26 @@ func (web *Web) matchPlayWebsocketHandler(w http.ResponseWriter, r *http.Request
 					continue
 				}
 				err = web.arena.LoadMatch(match)
+
+				if web.arena.AllianceStations["R1"].Team == nil {
+					web.arena.AllianceStations["R1"].Bypass = true
+				}
+				if web.arena.AllianceStations["R2"].Team == nil {
+					web.arena.AllianceStations["R2"].Bypass = true
+				}
+				if web.arena.AllianceStations["R3"].Team == nil {
+					web.arena.AllianceStations["R3"].Bypass = true
+				}
+				if web.arena.AllianceStations["B1"].Team == nil {
+					web.arena.AllianceStations["B1"].Bypass = true
+				}
+				if web.arena.AllianceStations["B2"].Team == nil {
+					web.arena.AllianceStations["B2"].Bypass = true
+				}
+				if web.arena.AllianceStations["B3"].Team == nil {
+					web.arena.AllianceStations["B3"].Bypass = true
+				}
+
 			}
 			if err != nil {
 				ws.WriteError(err.Error())
@@ -224,6 +244,7 @@ func (web *Web) matchPlayWebsocketHandler(w http.ResponseWriter, r *http.Request
 			} else {
 				web.arena.SavedRankings = game.Rankings{}
 			}
+
 			web.arena.SavedMatch = match
 			web.arena.SavedMatchResult = matchResult
 			web.arena.ScorePostedNotifier.Notify()

@@ -914,7 +914,7 @@ func (web *Web) ftaCsvReportHandler(w http.ResponseWriter, r *http.Request) {
 
 func addTimeGeneratedFooter(pdf *gofpdf.Fpdf) {
 	footerText := fmt.Sprintf(
-		"Report generated at %s on %s", time.Now().Format("3:04:05 PM"), time.Now().Format("Mon Jan 2 2006"),
+		"[CyberArena] Report generated at %s on %s", time.Now().Format("3:04:05 PM"), time.Now().Format("Mon Jan 2 2006"),
 	)
 	pdf.SetFont("Arial", "", 10)
 	pdf.CellFormat(0, 10, footerText, "", 1, "L", false, 0, "")

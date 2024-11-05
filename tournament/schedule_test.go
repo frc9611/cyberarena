@@ -5,13 +5,14 @@ package tournament
 
 import (
 	"fmt"
-	"github.com/frc9611/cyberarena/model"
-	"github.com/stretchr/testify/assert"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
+
+	"github.com/frc9611/cyberarena/model"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestMain(m *testing.M) {

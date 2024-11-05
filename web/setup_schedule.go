@@ -7,11 +7,12 @@ package web
 
 import (
 	"fmt"
-	"github.com/frc9611/cyberarena/model"
-	"github.com/frc9611/cyberarena/tournament"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/frc9611/cyberarena/model"
+	"github.com/frc9611/cyberarena/tournament"
 )
 
 // Global vars to hold schedules that are in the process of being generated.
@@ -78,8 +79,8 @@ func (web *Web) scheduleGeneratePostHandler(w http.ResponseWriter, r *http.Reque
 			"generating the schedule.")
 		return
 	}
-	if len(teams) < 6 {
-		web.renderSchedule(w, r, fmt.Sprintf("There are only %d teams. There must be at least 6 teams to generate "+
+	if len(teams) < 4 {
+		web.renderSchedule(w, r, fmt.Sprintf("There are only %d teams. There must be at least 4 teams to generate "+
 			"a schedule.", len(teams)))
 		return
 	}

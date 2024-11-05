@@ -6,8 +6,9 @@
 package model
 
 import (
-	"github.com/frc9611/cyberarena/game"
 	"sort"
+
+	"github.com/frc9611/cyberarena/game"
 )
 
 func (database *Database) CreateRanking(ranking *game.Ranking) error {

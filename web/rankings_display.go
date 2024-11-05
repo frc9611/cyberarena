@@ -6,9 +6,10 @@
 package web
 
 import (
+	"net/http"
+
 	"github.com/frc9611/cyberarena/model"
 	"github.com/frc9611/cyberarena/websocket"
-	"net/http"
 )
 
 // Renders the display which shows scrolling rankings.
