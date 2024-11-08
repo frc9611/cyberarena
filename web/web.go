@@ -7,13 +7,14 @@ package web
 
 import (
 	"fmt"
-	"github.com/frc9611/cyberarena/game"
 	"log"
 	"net/http"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"text/template"
+
+	"github.com/frc9611/cyberarena/game"
 
 	"github.com/frc9611/cyberarena/field"
 	"github.com/frc9611/cyberarena/model"
@@ -25,12 +26,17 @@ const (
 )
 
 type Web struct {
+	loggedUser      string
 	arena           *field.Arena
 	templateHelpers template.FuncMap
 }
 
 func NewWeb(arena *field.Arena) *Web {
 	web := &Web{arena: arena}
+
+	if web.arena.EventSettings.AdminPassword == "" {
+		web.loggedUser = adminUser
+	}
 
 	// Helper functions that can be used inside templates.
 	web.templateHelpers = template.FuncMap{

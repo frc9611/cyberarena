@@ -6,12 +6,16 @@
 package web
 
 import (
+	"encoding/json"
 	"fmt"
-	"github.com/frc9611/cyberarena/model"
-	"github.com/google/uuid"
+	"io"
 	"net/http"
 	"net/url"
+	"strings"
 	"time"
+
+	"github.com/frc9611/cyberarena/model"
+	"github.com/google/uuid"
 )
 
 // Shows the login form.
@@ -86,10 +90,45 @@ func (web *Web) getUserSessionFromCookie(r *http.Request) *model.UserSession {
 	return session
 }
 
+func vernumLogin(user, password string) bool {
+	url := "http://server.joaorodrigo.eu:32080/login"
+	method := "POST"
+
+	payload := strings.NewReader(`{"username": "` + user + `", "password": "` + password + `"}`)
+	client := &http.Client{}
+	req, err := http.NewRequest(method, url, payload)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+
+	req.Header.Add("Content-Type", "application/json")
+
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+
+	fmt.Println(string(body))
+	var jsonMap map[string]interface{}
+	json.Unmarshal([]byte(string(body)), &jsonMap)
+	_, ok := jsonMap["accessToken"]
+	return ok
+
+}
+
 func (web *Web) checkAuthPassword(user, password string) error {
-	if user == adminUser && password == web.arena.EventSettings.AdminPassword {
+	if (user == adminUser && password == web.arena.EventSettings.AdminPassword) || (vernumLogin(user, password)) {
+		web.loggedUser = user
 		return nil
 	} else {
-		return fmt.Errorf("Invalid login credentials.")
+		return fmt.Errorf("[VERNUM SERVER] Invalid login credentials.")
 	}
 }
